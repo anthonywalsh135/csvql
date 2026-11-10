@@ -44,3 +44,27 @@ export function outputColumns(node) {
       return outputColumns(node.input);
   }
 }
+
+//a copy of the node with every expression it holds replaced by fn(expression)
+export function mapExpressions(node, fn) {
+  const optional = (expr) => (expr === null ? null : fn(expr));
+  switch (node.type) {
+    case 'filter':
+      return { ...node, predicate: fn(node.predicate) };
+    case 'join':
+      return { ...node, condition: optional(node.condition) };
+    case 'project':
+      return { ...node, items: node.items.map((item) => ({ ...item, expr: fn(item.expr) })) };
+    case 'sort':
+    case 'top-n':
+      return { ...node, keys: node.keys.map((key) => ({ ...key, expr: fn(key.expr) })) };
+    case 'aggregate':
+      return {
+        ...node,
+        groups: node.groups.map((group) => ({ ...group, expr: fn(group.expr) })),
+        aggregates: node.aggregates.map((entry) => ({ ...entry, arg: optional(entry.arg) })),
+      };
+    default:
+      return node;
+  }
+}
