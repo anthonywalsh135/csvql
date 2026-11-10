@@ -28,7 +28,7 @@
     "start": "node bin/csvql.js --dir examples/data",
     "demo": "node bin/csvql.js --dir examples/data --file examples/queries.sql",
     "test": "node --test \"test/**/*.test.js\"",
-    "coverage": "node --test --experimental-test-coverage --test-coverage-include=src/** --test-coverage-lines=90 --test-coverage-branches=85 \"test/**/*.test.js\"",
+    "coverage": "node --test --experimental-test-coverage --test-coverage-include=\"src/**\" --test-coverage-lines=90 --test-coverage-branches=85 \"test/**/*.test.js\"",
     "bench": "node bench/run.js",
     "lint": "eslint .",
     "format": "prettier --write .",
