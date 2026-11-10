@@ -42,6 +42,15 @@ const KEYWORDS = new Set([
   'CAST',
   'EXPLAIN',
   'ANALYZE',
+  //not supported, but reserved so that they get a clear error instead of being
+  //read as a table alias
+  'RIGHT',
+  'FULL',
+  'NATURAL',
+  'USING',
+  'UNION',
+  'EXCEPT',
+  'INTERSECT',
 ]);
 
 //longest first, so that "<=" is not read as "<" followed by "="
