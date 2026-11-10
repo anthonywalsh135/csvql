@@ -180,8 +180,9 @@ test('types come from the sample, so a late surprise does not change them', asyn
 
 test('the row count of a large file is estimated from the sample', async (t) => {
   const lines = ['id,city,amount'];
-  for (let i = 0; i < 20000; i++)
+  for (let i = 0; i < 20000; i++) {
     lines.push(`${i},${i % 7 === 0 ? 'Southampton' : 'Leeds'},${i * 1.5}`);
+  }
   const dir = await tempDir(t, { 'big.csv': lines.join('\n') + '\n' });
   const { estimatedRows } = await inferSchema(join(dir, 'big.csv'));
   assert.notEqual(estimatedRows, 20000, 'this file is too big to have been counted');
