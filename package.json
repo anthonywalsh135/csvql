@@ -1,0 +1,39 @@
+{
+  "name": "csvql",
+  "version": "1.0.0",
+  "description": "A SQL query engine for CSV files, written from scratch in JavaScript",
+  "keywords": [
+    "sql",
+    "csv",
+    "query-engine",
+    "parser",
+    "query-optimizer"
+  ],
+  "license": "MIT",
+  "author": "Anthony Walsh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anthonywalsh135/csvql.git"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "test": "node --test \"test/**/*.test.js\"",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.14.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^17.14.0",
+    "prettier": "^3.9.10"
+  },
+  "overrides": {
+    "minimatch": "^11.0.5"
+  }
+}

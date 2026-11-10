@@ -1,0 +1,20 @@
+#dependencies
+node_modules/
+
+#test and benchmark output
+coverage/
+bench/data/
+*.log
+
+#builds and local settings
+dist/
+.env
+.env.*
+
+#editors and operating systems
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
