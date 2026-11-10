@@ -77,10 +77,11 @@ export async function inferSchema(path, options = {}) {
     throw new CsvError(`${basename(path)} is empty, so there is no header to name its columns`);
   }
 
-  const [header, ...rows] = records;
+  const header = records[0];
+  const sample = records.slice(1, sampleRows + 1);
   const columns = columnNames(header).map((name, index) => {
     //a row can be shorter than the header, which leaves a gap rather than a null
-    const values = rows.map((row) => row[index] ?? null).filter((value) => value !== null);
+    const values = sample.map((row) => row[index] ?? null).filter((value) => value !== null);
     return { name, type: inferType(values) };
   });
 
