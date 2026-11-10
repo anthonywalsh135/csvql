@@ -1,0 +1,301 @@
+id,name,country,joined,newsletter
+1,Hana Moreau,Spain,2024-09-10,true
+2,Chen Garcia,Netherlands,2023-10-21,true
+3,Alan Patel,France,2023-04-25,true
+4,Edsger Byrne,Italy,2024-07-19,true
+5,Chen Lindqvist,Netherlands,2025-08-11,false
+6,Noor Lindqvist,Ireland,2024-02-19,true
+7,Liam Murphy,Ireland,2025-07-07,true
+8,Ada Moreau,Netherlands,2025-01-11,true
+9,Tom Garcia,Germany,2024-01-01,true
+10,Tom Haddad,Italy,2025-04-10,true
+11,Hana Haddad,Italy,2024-08-23,false
+12,Noor Patel,Germany,2024-05-16,false
+13,Noor Schmidt,Spain,2025-08-26,true
+14,Ada Haddad,United Kingdom,2025-08-09,false
+15,Barbara Novak,Germany,2024-08-11,true
+16,Rosa Larsen,United Kingdom,2025-08-26,false
+17,Priya Haddad,Germany,2024-07-05,true
+18,Rosa Murphy,Italy,2025-03-02,true
+19,Tom Larsen,Germany,2024-04-06,true
+20,Chen Murphy,Italy,2024-07-10,true
+21,Alan Tanaka,Italy,2025-04-22,true
+22,Edsger de Vries,Sweden,2023-07-14,false
+23,Rosa Okafor,Germany,2023-05-11,false
+24,Katya Haddad,United Kingdom,2023-11-17,true
+25,Rosa Byrne,United Kingdom,2024-02-04,true
+26,Rosa Murphy,Spain,2025-01-19,true
+27,Chen Tanaka,United Kingdom,2023-02-25,true
+28,Tom Novak,Netherlands,2025-09-11,true
+29,Barbara Haddad,Ireland,2025-06-24,true
+30,Dev Okafor,Germany,2024-08-01,false
+31,Fatima Tanaka,Germany,2024-10-30,false
+32,Ines Byrne,Spain,2025-01-16,true
+33,Edsger Rossi,France,2023-05-04,true
+34,Edsger Walsh,France,2024-04-05,true
+35,Chen Lindqvist,Spain,2024-11-23,true
+36,Amara Haddad,Sweden,2025-07-24,false
+37,Mei Novak,Ireland,2024-01-30,false
+38,Jonas Moreau,Italy,2024-05-05,true
+39,Ines Kowalski,Netherlands,2023-07-13,false
+40,Amara Walsh,Ireland,2023-04-20,true
+41,Ada Moreau,United Kingdom,2024-11-07,true
+42,Alan Patel,United Kingdom,2024-01-15,true
+43,Grace Moreau,Germany,2024-07-01,true
+44,Priya Byrne,France,2023-05-16,false
+45,Noor Kowalski,Spain,2023-11-11,false
+46,Mei Novak,Spain,2024-11-26,true
+47,Amara Ito,Germany,2024-05-22,true
+48,Jonas de Vries,Italy,2024-01-28,true
+49,Mei Larsen,United Kingdom,2025-09-26,true
+50,Barbara Moreau,Italy,2024-08-04,false
+51,Priya Ito,Italy,2023-09-18,true
+52,Liam Novak,Ireland,2024-11-01,true
+53,Oscar Moreau,United Kingdom,2024-11-12,false
+54,Noor Haddad,Germany,2023-02-03,true
+55,Amara Kowalski,Germany,2024-09-23,true
+56,Tom Byrne,France,2025-08-23,false
+57,Priya Tanaka,Sweden,2025-09-04,false
+58,Ada Novak,Germany,2023-08-10,true
+59,Grace Novak,Germany,2023-04-21,false
+60,Jonas Byrne,Germany,2023-07-01,true
+61,Jonas Tanaka,Sweden,2025-03-29,true
+62,Grace Larsen,Ireland,2024-01-10,true
+63,Hana Haddad,Germany,2023-12-25,true
+64,Alan Schmidt,Germany,2023-10-11,true
+65,Tom Garcia,Netherlands,2023-02-15,false
+66,Liam Haddad,United Kingdom,2024-03-24,false
+67,Mei Tanaka,United Kingdom,2025-03-07,false
+68,Priya de Vries,Sweden,2025-01-17,true
+69,Chen Haddad,United Kingdom,2024-11-13,false
+70,Dev Patel,Germany,2024-03-10,true
+71,Priya Byrne,France,2024-03-04,true
+72,Chen Schmidt,France,2024-09-30,true
+73,Grace Murphy,Italy,2024-02-27,true
+74,Tom Murphy,Ireland,2024-09-19,true
+75,Ada Rossi,Spain,2025-01-25,false
+76,Edsger Ito,France,2023-12-15,true
+77,Amara Schmidt,Germany,2025-04-29,false
+78,Mei Moreau,United Kingdom,2024-02-05,true
+79,Edsger Tanaka,Netherlands,2023-04-06,true
+80,Dev Murphy,Ireland,2023-12-31,true
+81,Alan Haddad,United Kingdom,2025-01-03,false
+82,Amara Ito,Italy,2023-03-07,true
+83,Alan Novak,Netherlands,2024-12-16,false
+84,Alan Ito,Ireland,2023-01-23,true
+85,Noor Ito,Germany,2024-04-06,false
+86,Grace de Vries,France,2025-06-11,true
+87,Fatima Walsh,Spain,2025-06-06,true
+88,Ines Larsen,France,2023-03-17,false
+89,Fatima Novak,United Kingdom,2024-02-14,true
+90,Mei Haddad,Sweden,2025-04-14,false
+91,Mei Moreau,France,2025-01-08,true
+92,Noor Moreau,Italy,2025-08-26,true
+93,Fatima Moreau,Italy,2025-08-10,true
+94,Edsger Walsh,Italy,2025-04-23,true
+95,Dev Haddad,Germany,2024-04-24,true
+96,Grace Rossi,United Kingdom,2025-03-27,true
+97,Grace Byrne,United Kingdom,2024-09-17,false
+98,Jonas Larsen,Sweden,2024-06-15,true
+99,Jonas Haddad,United Kingdom,2025-08-05,true
+100,Grace Haddad,Sweden,2023-04-27,true
+101,Priya de Vries,France,2024-03-01,false
+102,Katya Tanaka,Netherlands,2025-01-09,true
+103,Katya Tanaka,Spain,2024-03-23,false
+104,Grace de Vries,Italy,2025-02-20,true
+105,Mei de Vries,Spain,2023-01-13,true
+106,Chen Garcia,Sweden,2024-01-14,false
+107,Alan Byrne,Ireland,2023-03-07,true
+108,Oscar Patel,Spain,2024-02-23,false
+109,Tom Lindqvist,France,2024-05-23,false
+110,Mei Byrne,United Kingdom,2023-10-10,true
+111,Liam Murphy,Sweden,2025-08-11,false
+112,Barbara Ito,Germany,2025-08-11,true
+113,Edsger Lindqvist,Italy,2024-06-23,false
+114,Ines Byrne,United Kingdom,2023-03-29,true
+115,Dev Ito,Italy,2023-05-18,false
+116,Liam Moreau,United Kingdom,2025-02-26,false
+117,Chen Okafor,France,2023-11-28,true
+118,Amara Haddad,Ireland,2025-01-18,true
+119,Oscar Ito,Spain,2024-01-22,false
+120,Noor Ito,United Kingdom,2023-08-16,false
+121,Katya Haddad,France,2024-02-25,true
+122,Jonas de Vries,Ireland,2023-10-15,false
+123,Alan Ito,Spain,2023-09-29,true
+124,Chen Byrne,Spain,2023-07-18,true
+125,Amara Larsen,United Kingdom,2023-03-15,false
+126,Alan Ito,Germany,2025-01-26,true
+127,Oscar Ito,Spain,2023-12-20,false
+128,Chen Walsh,Ireland,2024-11-20,false
+129,Tom Patel,Germany,2024-11-15,true
+130,Edsger Murphy,Germany,2025-06-27,true
+131,Grace Patel,Italy,2023-01-22,true
+132,Grace Murphy,United Kingdom,2024-10-15,false
+133,Rosa Lindqvist,Germany,2023-12-13,true
+134,Rosa de Vries,Ireland,2025-08-09,false
+135,Chen de Vries,United Kingdom,2024-02-04,false
+136,Dev Larsen,United Kingdom,2024-01-01,false
+137,Barbara Kowalski,United Kingdom,2023-01-15,true
+138,Barbara Schmidt,Germany,2023-02-21,true
+139,Dev Byrne,United Kingdom,2024-02-12,true
+140,Barbara Garcia,Netherlands,2023-07-29,false
+141,Ada Novak,Italy,2023-03-13,true
+142,Noor Moreau,Germany,2025-04-30,false
+143,Tom Lindqvist,Ireland,2025-03-17,false
+144,Grace Lindqvist,Germany,2023-08-10,true
+145,Tom Haddad,France,2024-06-10,false
+146,Rosa Larsen,Netherlands,2023-01-30,true
+147,Rosa Rossi,United Kingdom,2025-07-29,true
+148,Hana Lindqvist,Spain,2023-11-08,false
+149,Ines Schmidt,Sweden,2024-05-16,true
+150,Mei Larsen,United Kingdom,2023-05-16,true
+151,Chen Byrne,Spain,2025-09-21,true
+152,Jonas Haddad,Germany,2024-08-28,true
+153,Liam Larsen,France,2023-05-28,false
+154,Rosa Garcia,Spain,2024-12-29,true
+155,Oscar Garcia,Germany,2025-01-16,true
+156,Chen de Vries,Italy,2024-07-23,true
+157,Oscar Larsen,United Kingdom,2024-03-12,true
+158,Chen Byrne,Italy,2024-05-05,true
+159,Grace Haddad,Italy,2024-02-10,false
+160,Fatima Tanaka,United Kingdom,2024-01-25,true
+161,Noor Walsh,United Kingdom,2024-04-17,false
+162,Katya Patel,United Kingdom,2024-11-17,true
+163,Priya Okafor,United Kingdom,2025-04-22,true
+164,Ada Patel,France,2024-07-31,true
+165,Jonas Haddad,Germany,2023-01-16,true
+166,Katya Schmidt,France,2024-06-24,true
+167,Edsger Murphy,Netherlands,2025-05-07,true
+168,Rosa Lindqvist,United Kingdom,2025-04-08,false
+169,Liam Lindqvist,United Kingdom,2023-10-09,false
+170,Liam de Vries,France,2024-07-11,false
+171,Liam Larsen,Germany,2024-12-28,true
+172,Fatima Tanaka,United Kingdom,2024-09-21,true
+173,Ada Patel,Germany,2024-07-28,false
+174,Hana Patel,Ireland,2025-07-12,true
+175,Chen Garcia,Germany,2023-06-28,true
+176,Grace Rossi,Sweden,2023-02-11,false
+177,Dev de Vries,Germany,2025-04-15,true
+178,Edsger Byrne,Netherlands,2025-05-01,true
+179,Priya Tanaka,Netherlands,2025-09-10,false
+180,Ines Larsen,United Kingdom,2023-11-19,true
+181,Amara Walsh,Sweden,2023-04-24,true
+182,Chen Ito,Spain,2023-08-05,true
+183,Grace de Vries,United Kingdom,2025-07-22,false
+184,Noor Larsen,Sweden,2024-01-18,true
+185,Fatima Okafor,Germany,2024-02-19,true
+186,Dev Walsh,Germany,2025-03-01,true
+187,Mei Garcia,Spain,2025-05-02,false
+188,Ada Patel,France,2025-09-05,true
+189,Rosa Lindqvist,United Kingdom,2023-04-04,true
+190,Ines Walsh,United Kingdom,2023-04-16,false
+191,Hana Haddad,Italy,2024-12-14,true
+192,Rosa Patel,United Kingdom,2024-02-15,true
+193,Edsger Kowalski,Italy,2023-11-27,false
+194,Tom Byrne,Germany,2024-09-23,true
+195,Katya Haddad,Italy,2025-04-12,true
+196,Barbara Tanaka,Germany,2025-03-27,false
+197,Barbara Walsh,United Kingdom,2023-04-03,false
+198,Oscar de Vries,Germany,2023-12-18,false
+199,Jonas Lindqvist,Spain,2024-09-07,false
+200,Liam Lindqvist,France,2023-08-29,true
+201,Ines Garcia,United Kingdom,2025-06-14,false
+202,Barbara Novak,Germany,2024-02-06,false
+203,Rosa Okafor,Spain,2025-07-10,true
+204,Chen Novak,Netherlands,2023-12-24,true
+205,Noor Garcia,Ireland,2024-07-14,true
+206,Chen Schmidt,Sweden,2025-03-11,false
+207,Chen Walsh,United Kingdom,2023-03-03,true
+208,Liam Kowalski,Ireland,2025-03-18,false
+209,Alan Moreau,United Kingdom,2025-03-14,true
+210,Rosa Larsen,Spain,2023-02-04,true
+211,Chen Novak,Ireland,2024-05-06,true
+212,Hana Okafor,United Kingdom,2024-08-19,false
+213,Hana Novak,Sweden,2024-11-26,false
+214,Fatima Moreau,Germany,2023-05-08,true
+215,Dev Patel,Germany,2023-03-01,false
+216,Chen Schmidt,Ireland,2023-06-13,true
+217,Priya de Vries,Sweden,2024-03-23,false
+218,Dev Walsh,Netherlands,2025-02-07,true
+219,Rosa Haddad,United Kingdom,2025-01-11,true
+220,Ines Lindqvist,Netherlands,2024-11-11,true
+221,Alan Patel,Germany,2024-09-21,true
+222,Alan Larsen,United Kingdom,2023-06-29,false
+223,Priya Byrne,Italy,2023-05-01,true
+224,Jonas Byrne,Germany,2024-04-12,false
+225,Rosa Ito,United Kingdom,2024-02-15,false
+226,Mei Rossi,Sweden,2025-05-22,true
+227,Barbara Larsen,United Kingdom,2025-05-23,true
+228,Edsger Okafor,United Kingdom,2024-09-26,false
+229,Ines Okafor,Netherlands,2023-08-24,true
+230,Tom Novak,United Kingdom,2025-06-25,true
+231,Liam Okafor,Ireland,2024-12-06,false
+232,Jonas Haddad,Germany,2025-04-13,true
+233,Grace de Vries,Germany,2025-06-04,true
+234,Mei Garcia,Spain,2023-04-27,false
+235,Amara Walsh,Ireland,2023-02-19,false
+236,Liam Lindqvist,Spain,2025-08-03,true
+237,Noor Tanaka,Netherlands,2023-12-18,true
+238,Hana Lindqvist,Sweden,2024-02-05,false
+239,Jonas Walsh,United Kingdom,2023-12-31,true
+240,Ines Lindqvist,Italy,2023-11-22,false
+241,Tom Kowalski,Spain,2023-07-18,false
+242,Jonas Okafor,Ireland,2024-03-07,true
+243,Mei Schmidt,Sweden,2023-03-29,false
+244,Edsger Patel,Sweden,2024-04-08,false
+245,Rosa Rossi,Spain,2023-09-21,false
+246,Amara Moreau,Ireland,2024-12-21,true
+247,Grace Schmidt,Germany,2023-05-09,true
+248,Priya Lindqvist,Spain,2024-04-04,true
+249,Noor Larsen,Germany,2023-10-13,false
+250,Noor de Vries,Germany,2025-09-24,true
+251,Hana Garcia,Ireland,2024-06-07,false
+252,Oscar Moreau,Spain,2023-08-24,true
+253,Fatima Okafor,Germany,2024-11-03,false
+254,Ada Okafor,France,2025-08-14,false
+255,Oscar Walsh,United Kingdom,2023-02-06,true
+256,Katya Novak,Ireland,2025-03-13,false
+257,Grace Walsh,Ireland,2025-07-22,true
+258,Oscar Moreau,United Kingdom,2024-02-09,false
+259,Noor Larsen,Germany,2024-01-18,false
+260,Liam Murphy,United Kingdom,2023-09-22,true
+261,Chen Haddad,Ireland,2024-04-16,true
+262,Fatima Novak,Sweden,2024-04-08,true
+263,Ada Haddad,United Kingdom,2024-06-22,true
+264,Tom Schmidt,Germany,2025-01-11,false
+265,Dev Byrne,Spain,2024-11-18,true
+266,Grace Byrne,Italy,2023-02-22,true
+267,Fatima Tanaka,Netherlands,2025-08-29,true
+268,Katya Okafor,United Kingdom,2025-08-23,true
+269,Fatima Moreau,Ireland,2023-01-21,false
+270,Amara Larsen,United Kingdom,2024-08-15,true
+271,Hana Larsen,United Kingdom,2024-02-15,true
+272,Edsger Novak,United Kingdom,2024-02-04,true
+273,Rosa Novak,Spain,2024-09-15,true
+274,Mei Tanaka,France,2023-08-28,true
+275,Priya Novak,United Kingdom,2023-09-24,true
+276,Jonas Larsen,Ireland,2024-08-15,false
+277,Grace Kowalski,Netherlands,2025-09-01,false
+278,Liam Okafor,Germany,2024-10-11,true
+279,Mei Moreau,Sweden,2024-09-18,true
+280,Grace Larsen,United Kingdom,2024-10-20,true
+281,Chen Novak,France,2023-02-20,true
+282,Dev Schmidt,Germany,2023-09-26,true
+283,Liam Walsh,Germany,2025-06-07,false
+284,Noor Novak,Sweden,2025-05-21,true
+285,Jonas Novak,United Kingdom,2024-10-09,false
+286,Alan Novak,Netherlands,2024-04-27,false
+287,Oscar Walsh,France,2023-04-25,true
+288,Oscar Byrne,France,2025-01-22,false
+289,Noor Larsen,United Kingdom,2023-08-28,false
+290,Ines de Vries,Ireland,2023-05-19,false
+291,Grace Novak,Ireland,2023-05-12,true
+292,Priya Byrne,United Kingdom,2023-12-23,true
+293,Hana Larsen,Germany,2024-11-28,false
+294,Liam Ito,Sweden,2024-04-09,true
+295,Edsger Moreau,Germany,2025-02-19,false
+296,Mei Rossi,United Kingdom,2024-09-12,false
+297,Amara Walsh,United Kingdom,2023-01-07,true
+298,Barbara Novak,Germany,2023-10-10,true
+299,Rosa Murphy,United Kingdom,2025-01-31,true
+300,Liam Novak,United Kingdom,2024-11-29,false
