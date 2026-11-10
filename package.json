@@ -18,6 +18,9 @@
   "private": true,
   "type": "module",
   "exports": "./src/index.js",
+  "bin": {
+    "csvql": "bin/csvql.js"
+  },
   "engines": {
     "node": ">=22.13"
   },
