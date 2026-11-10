@@ -396,3 +396,22 @@ test('each kind of mistake is reported as its own kind of error', async (t) => {
   await assert.rejects(db.query('SELECT * FROM bad'), CsvError);
   await assert.rejects(db.query('SELECT name + 1 FROM people'), ExecutionError);
 });
+
+test('a join can produce far more rows than it reads', async (t) => {
+  //forty rows that all share one key, so each join below makes 1,600 rows,
+  //which is more than fits in a single batch
+  const lines = ['id,k'];
+  for (let id = 1; id <= 40; id++) lines.push(`${id},7`);
+  const db = await shop(t, { files: { 'n.csv': lines.join('\n') } });
+  const queries = [
+    'FROM n a, n b',
+    'FROM n a JOIN n b ON a.k = b.k',
+    'FROM n a LEFT JOIN n b ON a.k = b.k',
+    'FROM n a JOIN n b ON a.k <= b.k',
+    'FROM n a LEFT JOIN n b ON a.k <= b.k',
+  ];
+  for (const from of queries) {
+    const sql = `SELECT COUNT(*), SUM(a.id), SUM(b.id), COUNT(DISTINCT a.id * 100 + b.id) ${from}`;
+    assert.deepEqual(await rowsOf(db, sql), [[1600, 32800, 32800, 1600]], from);
+  }
+});
