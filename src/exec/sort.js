@@ -1,7 +1,9 @@
-//ORDER BY. the whole input has to be seen before the first row can be
-//returned, so this is one of the operators that holds rows in memory.
+//ORDER BY, in two forms: a full sort, and a top-n for when a LIMIT follows.
+//either way the whole input has to be seen before the first row can be
+//returned.
 
 import { inBatches } from './batches.js';
+import { BoundedHeap } from './heap.js';
 import { compareValues } from './values.js';
 
 //a comparator over entries of the form { keys, row }, where keys holds the
@@ -27,4 +29,23 @@ export async function* sort(input, keys) {
   //the built-in sort is stable, so rows that tie keep the order they came in
   entries.sort(byKeys(keys));
   yield* inBatches(entries.map((entry) => entry.row));
+}
+
+//ORDER BY with a LIMIT. only the rows that could still be in the result are
+//kept, in a heap, so the memory used is the size of the limit and not of the
+//input, and most rows cost one comparison against the worst row kept.
+export async function* topN(input, keys, count, offset) {
+  const order = byKeys(keys);
+  //rows that tie are told apart by the order they arrived in. that makes the
+  //result exactly what a stable sort followed by a limit would have given.
+  const heap = new BoundedHeap(count + offset, (a, b) => order(a, b) || a.arrival - b.arrival);
+  let arrival = 0;
+  for await (const batch of input) {
+    for (const row of batch) {
+      heap.offer({ keys: keys.map((key) => key.value(row)), row, arrival });
+      arrival += 1;
+    }
+  }
+  const rows = heap.sorted().slice(offset);
+  yield* inBatches(rows.map((entry) => entry.row));
 }

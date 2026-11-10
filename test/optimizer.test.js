@@ -19,7 +19,7 @@ const cities = table('cities', 40, 'city', 'country');
 
 //the plan for a query as lines of text, with only the named rules applied
 function planFor(sql, tables, ...rules) {
-  const all = ['foldConstants', 'pushDownPredicates', 'hashJoins'];
+  const all = ['foldConstants', 'pushDownPredicates', 'hashJoins', 'topN', 'pruneColumns'];
   const switches = Object.fromEntries(all.map((rule) => [rule, rules.includes(rule)]));
   return explainPlan(optimize(bind(parse(sql).select, tables).plan, switches)).split('\n');
 }
@@ -260,4 +260,115 @@ test('a hash join never matches on null and checks the rest of its condition', a
     ['c', null],
     ['d', 'q'],
   ]);
+});
+
+test('a scan reads only the columns the query uses', () => {
+  const sql =
+    "SELECT p.name FROM people p JOIN orders o ON o.person_id = p.id WHERE o.item = 'pen' ORDER BY p.age";
+  assert.deepEqual(planFor(sql, [people, orders], 'pruneColumns'), [
+    'Project p.name',
+    '└─ Sort by p.age',
+    "   └─ Filter o.item = 'pen'",
+    '      └─ Join on o.person_id = p.id',
+    '         ├─ Scan people.csv as p (id, name, age) ~1,000 rows',
+    '         └─ Scan orders.csv as o (person_id, item) ~50,000 rows',
+  ]);
+});
+
+test('an aggregate decides what is read, not the columns above it', () => {
+  const grouped = 'SELECT city, MAX(age) FROM people GROUP BY city HAVING COUNT(*) > 1';
+  assert.match(planFor(grouped, [people], 'pruneColumns').at(-1), /Scan people\.csv \(city, age\)/);
+  assert.match(
+    planFor('SELECT COUNT(*) FROM people', [people], 'pruneColumns').at(-1),
+    /\(no columns\)/,
+  );
+  assert.match(
+    planFor('SELECT * FROM people', [people], 'pruneColumns').at(-1),
+    /\(id, name, city, age\)/,
+  );
+  const distinct = 'SELECT DISTINCT city FROM people ORDER BY 1 LIMIT 2';
+  assert.match(planFor(distinct, [people], 'pruneColumns').at(-1), /Scan people\.csv \(city\)/);
+});
+
+test('a limit moves below the select list and merges with a sort', () => {
+  const sql =
+    'SELECT name, age * 2 AS double FROM people ORDER BY age DESC, name LIMIT 5 OFFSET 10';
+  assert.deepEqual(planFor(sql, [people], 'topN'), [
+    'Project name, age * 2 AS double',
+    '└─ Top 5 after 10 by age DESC, name',
+    '   └─ Scan people.csv (id, name, city, age) ~1,000 rows',
+  ]);
+  assert.deepEqual(planFor('SELECT name FROM people LIMIT 3', [people], 'topN'), [
+    'Project name',
+    '└─ Limit 3',
+    '   └─ Scan people.csv (id, name, city, age) ~1,000 rows',
+  ]);
+});
+
+test('a limit cannot move below DISTINCT, but still merges with the sort above it', () => {
+  assert.deepEqual(
+    planFor('SELECT DISTINCT city FROM people LIMIT 3', [people], 'topN').slice(0, 3),
+    ['Limit 3', '└─ Distinct', '   └─ Project city'],
+  );
+  const sorted = 'SELECT DISTINCT city FROM people ORDER BY city LIMIT 3';
+  assert.deepEqual(planFor(sorted, [people], 'topN').slice(0, 3), [
+    'Top 3 by city',
+    '└─ Distinct',
+    '   └─ Project city',
+  ]);
+});
+
+test('every rule together', () => {
+  const sql = `SELECT c.country, COUNT(*) AS orders, SUM(o.amount) AS spent
+               FROM orders o, people p, cities c
+               WHERE o.person_id = p.id AND c.city = p.city AND o.amount > 5 * 2 AND c.country <> 'UK'
+               GROUP BY c.country ORDER BY spent DESC LIMIT 3`;
+  assert.deepEqual(
+    planFor(
+      sql,
+      [orders, people, cities],
+      'foldConstants',
+      'pushDownPredicates',
+      'hashJoins',
+      'topN',
+      'pruneColumns',
+    ),
+    [
+      'Project c.country, COUNT(*) AS orders, SUM(o.amount) AS spent',
+      '└─ Top 3 by SUM(o.amount) DESC',
+      '   └─ Aggregate by c.country: COUNT(*), SUM(o.amount)',
+      '      └─ Hash join on c.city = p.city (table from right)',
+      '         ├─ Hash join on o.person_id = p.id (table from right)',
+      '         │  ├─ Filter o.amount > 10',
+      '         │  │  └─ Scan orders.csv as o (person_id, amount) ~50,000 rows',
+      '         │  └─ Scan people.csv as p (id, city) ~1,000 rows',
+      "         └─ Filter c.country <> 'UK'",
+      '            └─ Scan cities.csv as c (city, country) ~40 rows',
+    ],
+  );
+});
+
+test('top-n gives exactly the rows that a full sort and a limit would', async (t) => {
+  const lines = ['id,grade,score'];
+  for (let id = 1; id <= 500; id++) lines.push(`${id},${'abc'[id % 3]},${(id * 7919) % 23}`);
+  const files = { 'marks.csv': lines.join('\n') };
+  const fast = await shop(t, { files, chunkSize: 512 });
+  const slow = await shop(t, { files, optimizer: { topN: false } });
+  //few distinct scores, so nearly every row ties with others and the order
+  //among them has to come out the same both ways
+  const queries = [
+    'SELECT id FROM marks ORDER BY score LIMIT 7',
+    'SELECT id FROM marks ORDER BY score DESC, grade LIMIT 20 OFFSET 15',
+    'SELECT id, score FROM marks ORDER BY grade LIMIT 1',
+    'SELECT id FROM marks ORDER BY score LIMIT 1000',
+    'SELECT id FROM marks ORDER BY score LIMIT 5 OFFSET 498',
+    'SELECT id FROM marks ORDER BY score LIMIT 0',
+    'SELECT DISTINCT score FROM marks ORDER BY score DESC LIMIT 4',
+  ];
+  for (const sql of queries) {
+    assert.match(await fast.explain(sql), /Top \d+/);
+    assert.doesNotMatch(await slow.explain(sql), /Top \d+/);
+    assert.deepEqual((await fast.query(sql)).rows, (await slow.query(sql)).rows, sql);
+  }
+  assert.deepEqual((await fast.query(queries[0])).rows.flat(), [23, 46, 69, 92, 115, 138, 161]);
 });

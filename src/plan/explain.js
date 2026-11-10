@@ -39,10 +39,15 @@ function describe(node) {
     }
     case 'sort':
       return `Sort by ${keyList(node.keys)}`;
+    case 'top-n': {
+      const skipped = node.offset > 0 ? ` after ${node.offset}` : '';
+      return `Top ${node.limit}${skipped} by ${keyList(node.keys)}`;
+    }
     case 'project': {
       const items = node.items.map(({ expr, name }) => {
         const text = formatExpr(expr);
-        return text === name || expr.name === name ? text : `${text} AS ${name}`;
+        //"p.name AS name" would say nothing that "p.name" does not
+        return text === name || text.endsWith(`.${name}`) ? text : `${text} AS ${name}`;
       });
       return `Project ${items.join(', ')}`;
     }

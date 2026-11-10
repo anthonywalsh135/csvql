@@ -5,11 +5,20 @@
 
 import { foldConstants } from './rules/fold.js';
 import { chooseJoinStrategies } from './rules/joins.js';
+import { pruneColumns } from './rules/prune.js';
 import { pushDownPredicates } from './rules/pushdown.js';
+import { useTopN } from './rules/topn.js';
 
 //applied in this order. a join can only be hashed once pushdown has handed it
-//the equality that was written in the WHERE clause.
-const RULES = { foldConstants, pushDownPredicates, hashJoins: chooseJoinStrategies };
+//the equality that was written in the WHERE clause, and pruning goes last so
+//that it sees where every expression finally ended up.
+const RULES = {
+  foldConstants,
+  pushDownPredicates,
+  hashJoins: chooseJoinStrategies,
+  topN: useTopN,
+  pruneColumns,
+};
 
 //rewrites a plan. switches names the rules to leave out, as { rule: false },
 //or is false to leave the plan exactly as the binder built it.

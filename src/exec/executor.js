@@ -12,7 +12,7 @@ import { compileCondition, compileExpr } from './expression.js';
 import { aggregate } from './group.js';
 import { hashJoin, nestedLoopJoin } from './join.js';
 import { distinct, filter, limit, project, scan } from './operators.js';
-import { sort } from './sort.js';
+import { sort, topN } from './sort.js';
 
 //a function that tells the expression compiler where in a row a column is
 function slotsOf(ids) {
@@ -76,11 +76,16 @@ function build(node, options) {
       }));
       return { ids: outputColumns(node), open: () => aggregate(input.open(), groups, aggregates) };
     }
-    case 'sort': {
+    case 'sort':
+    case 'top-n': {
       const keys = node.keys.map(({ expr, descending }) => ({
         value: compileExpr(expr, slots),
         descending,
       }));
+      if (node.type === 'top-n') {
+        const { limit: count, offset } = node;
+        return { ids: input.ids, open: () => topN(input.open(), keys, count, offset) };
+      }
       return { ids: input.ids, open: () => sort(input.open(), keys) };
     }
     case 'distinct':
