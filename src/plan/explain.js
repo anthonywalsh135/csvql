@@ -9,8 +9,12 @@ const keyList = (keys) =>
 
 function describeJoin(node) {
   if (node.kind === 'cross') return 'Cross join';
-  const kind = node.kind === 'left' ? 'Left join' : 'Join';
-  return node.condition === null ? kind : `${kind} on ${formatExpr(node.condition)}`;
+  const kind = node.kind === 'left' ? 'left join' : 'join';
+  if (node.strategy === 'hash') {
+    return `Hash ${kind} on ${formatExpr(node.condition)} (table from ${node.build})`;
+  }
+  const name = kind[0].toUpperCase() + kind.slice(1);
+  return node.condition === null ? name : `${name} on ${formatExpr(node.condition)}`;
 }
 
 function describe(node) {

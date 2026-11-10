@@ -10,7 +10,7 @@
 import { outputColumns } from '../plan/nodes.js';
 import { compileCondition, compileExpr } from './expression.js';
 import { aggregate } from './group.js';
-import { nestedLoopJoin } from './join.js';
+import { hashJoin, nestedLoopJoin } from './join.js';
 import { distinct, filter, limit, project, scan } from './operators.js';
 import { sort } from './sort.js';
 
@@ -39,11 +39,20 @@ function build(node, options) {
     const left = build(node.left, options);
     const right = build(node.right, options);
     const ids = [...left.ids, ...right.ids];
-    const settings = {
-      kind: node.kind,
-      condition: node.condition === null ? null : compileCondition(node.condition, slotsOf(ids)),
-      rightWidth: right.ids.length,
-    };
+    const condition = (expr) => (expr === null ? null : compileCondition(expr, slotsOf(ids)));
+    const shared = { kind: node.kind, rightWidth: right.ids.length };
+    if (node.strategy === 'hash') {
+      const settings = {
+        ...shared,
+        build: node.build,
+        //each side's keys are worked out from that side's rows alone
+        leftKeys: node.leftKeys.map((key) => compileExpr(key, slotsOf(left.ids))),
+        rightKeys: node.rightKeys.map((key) => compileExpr(key, slotsOf(right.ids))),
+        residual: condition(node.residual),
+      };
+      return { ids, open: () => hashJoin(left.open(), right.open(), settings) };
+    }
+    const settings = { ...shared, condition: condition(node.condition) };
     return { ids, open: () => nestedLoopJoin(left.open(), right.open(), settings) };
   }
 

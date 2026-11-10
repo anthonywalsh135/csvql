@@ -4,9 +4,12 @@
 //check that none of them changes an answer.
 
 import { foldConstants } from './rules/fold.js';
+import { chooseJoinStrategies } from './rules/joins.js';
 import { pushDownPredicates } from './rules/pushdown.js';
 
-const RULES = { foldConstants, pushDownPredicates };
+//applied in this order. a join can only be hashed once pushdown has handed it
+//the equality that was written in the WHERE clause.
+const RULES = { foldConstants, pushDownPredicates, hashJoins: chooseJoinStrategies };
 
 //rewrites a plan. switches names the rules to leave out, as { rule: false },
 //or is false to leave the plan exactly as the binder built it.
