@@ -11,10 +11,12 @@ import { describeError } from '../errors.js';
 import { Database } from '../index.js';
 import { parseScript } from '../sql/parser.js';
 import { FORMATS, render } from './render.js';
+import { startShell } from './shell.js';
 
 const USAGE = `usage: csvql [options] "<query>"
        csvql [options] -f <file>
        csvql [options] < <file>
+       csvql [options]            (opens an interactive shell)
 
 Runs SQL queries on CSV files. A table is a file in the data directory, named
 without its extension, or a path in quotes:
@@ -129,6 +131,13 @@ export async function main(args, { stdin, stdout, stderr }) {
     return misuse('give a query or a file of queries, not both');
   }
 
+  const db = new Database({
+    dir: values.dir,
+    //a tab is awkward to type in a shell, so the two characters \t stand for one
+    delimiter: values.delimiter === '\\t' ? '\t' : values.delimiter,
+    optimizer: values['no-optimize'] ? false : {},
+  });
+
   let script;
   if (values.file !== undefined) {
     try {
@@ -137,16 +146,14 @@ export async function main(args, { stdin, stdout, stderr }) {
       stderr.write(`error: cannot read ${values.file}\n`);
       return FAILED;
     }
+  } else if (positionals.length === 1) {
+    script = positionals[0];
+  } else if (stdin.isTTY) {
+    //nothing to run and somebody at the keyboard: open the shell
+    return startShell({ db, input: stdin, output: stdout });
   } else {
-    script = positionals.length === 1 ? positionals[0] : await text(stdin);
+    script = await text(stdin);
   }
   if (script.trim() === '') return misuse('no query given');
-
-  const db = new Database({
-    dir: values.dir,
-    //a tab is awkward to type in a shell, so the two characters \t stand for one
-    delimiter: values.delimiter === '\\t' ? '\t' : values.delimiter,
-    optimizer: values['no-optimize'] ? false : {},
-  });
   return (await runScript(db, script, values.format, { stdout, stderr })) ? OK : FAILED;
 }
